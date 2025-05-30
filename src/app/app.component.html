@@ -1,81 +1,85 @@
 <div class="min-h-screen bg-[#006d77] p-6 md:p-12 font-sans text-white">
-  <!-- Titre principal -->
+  <!-- Main Title -->
   <header class="mb-10 text-center">
-    <h1 style="color: white;" class="text-5xl italic font-bold uppercase bg-gradient-to-r from-[#83c5be] via-[#edf6f9] to-[#83c5be] bg-clip-text text-transparent mb-4">
-      Chatbot Bancaire Intelligent
-    </h1>
+    <!-- Banker Assistant Image -->
+    <div class="flex justify-center mb-4 text-[#edf6f9]">
+      <img src="../assets/bankeji_white.png" alt="Banker Assistant" class="h-48 w-48 object-contain" />
+    </div>
+    <!-- <h1 class="text-5xl italic font-bold uppercase bg-gradient-to-r from-[#83c5be] via-[#edf6f9] to-[#83c5be] bg-clip-text text-transparent mb-4">
+      ELBankeji
+    </h1> -->
     <p class="text-lg text-[#edf6f9]">
-      Posez vos questions concernant nos services bancaires, notre assistant est là pour vous répondre 24h/24.
+      Ask your questions about our banking services, our assistant is here to answer you 24/7.
     </p>
   </header>
 
-  <!-- Section de présentation -->
+  <!-- Presentation Section -->
   <section class="mb-12 grid md:grid-cols-2 gap-8">
     <div class="bg-white text-gray-800 p-6 rounded-2xl shadow-md hover:shadow-lg transition">
-      <h2 class="text-xl font-semibold text-[#006d77] mb-2">Fonctionnalités clés</h2>
+      <h2 class="text-xl font-semibold text-[#006d77] mb-2">Key Features</h2>
       <ul class="list-disc list-inside text-gray-700 space-y-1">
-        <li>Réponses instantanées à vos questions courantes</li>
-        <li>Assistance sur les produits bancaires : comptes, cartes, crédits</li>
-        <li>Disponible 24h/24 et 7j/7</li>
-        <li>Entièrement sécurisé</li>
+        <li>Instant answers to your common questions</li>
+        <li>Support on banking products: accounts, cards, loans</li>
+        <li>Available 24/7</li>
+        <li>Fully secure</li>
       </ul>
     </div>
     <div class="bg-white text-gray-800 p-6 rounded-2xl shadow-md hover:shadow-lg transition">
-      <h2 class="text-xl font-semibold text-[#006d77] mb-2">Pourquoi utiliser notre chatbot ?</h2>
+      <h2 class="text-xl font-semibold text-[#006d77] mb-2">Why use our chatbot?</h2>
       <p class="text-gray-700">
-        Notre assistant virtuel vous permet de gagner du temps en répondant à vos demandes simples sans avoir à appeler ou vous déplacer. Il est conçu pour vous offrir une expérience fluide et rapide.
+        Our virtual assistant helps you save time by answering simple requests without needing to call or visit. It is designed to provide you with a smooth and fast experience.
       </p>
     </div>
-        <!-- Nouveau container 1 -->
+    <!-- New container 1 -->
     <div class="bg-white text-gray-800 p-6 rounded-2xl shadow-md hover:shadow-lg transition">
-      <h2 class="text-xl font-semibold text-[#006d77] mb-2">Sécurité et confidentialité</h2>
+      <h2 class="text-xl font-semibold text-[#006d77] mb-2">Security and Privacy</h2>
       <p class="text-gray-700">
-        Toutes vos données sont protégées grâce à notre protocole de sécurité avancé, garantissant la confidentialité de vos échanges avec le chatbot.
+        All your data is protected thanks to our advanced security protocol, ensuring the confidentiality of your interactions with the chatbot.
       </p>
     </div>
 
-    <!-- Nouveau container 2 -->
+    <!-- New container 2 -->
     <div class="bg-white text-gray-800 p-6 rounded-2xl shadow-md hover:shadow-lg transition">
-      <h2 class="text-xl font-semibold text-[#006d77] mb-2">Support multicanal</h2>
+      <h2 class="text-xl font-semibold text-[#006d77] mb-2">Multichannel Support</h2>
       <p class="text-gray-700">
-        Notre chatbot est accessible sur plusieurs plateformes : site web, application mobile, et bientôt via messagerie instantanée pour plus de flexibilité.
+        Our chatbot is accessible on multiple platforms: website, mobile app, and soon via instant messaging for more flexibility.
       </p>
     </div>
   </section>
 
-  <!-- Espace pour intégrer le chatbot -->
+  <!-- Chatbot Integration Area -->
   <section class="bg-white text-gray-800 p-6 rounded-2xl shadow-md mb-12">
-    <h2 class="text-2xl font-semibold text-[#006d77] mb-4">Discutez avec notre assistant</h2>
+    <h2 class="text-2xl font-semibold text-[#006d77] mb-4">Chat with our assistant</h2>
     <p class="text-gray-700 mb-6">
-      Cliquez sur l'icône ci-dessous pour commencer la conversation.
+      Click on the icon below to start the conversation.
     </p>
-<dx-chat
-  [user]="currentUser"
-  (onMessageEntered)="onSendMessage($event)"
-    [reloadOnChange]="false"
-    [showAvatar]="false"
-    [showDayHeaders]="false"
-    [dataSource]="messages"
-    height="500"
-    messageTemplate="messageTemplate"
-    [showUserName]="false"
->
-  <div *dxTemplate="let data of 'messageTemplate'">
-    <ng-container *ngIf="data.message.isLoading">
-      <span class="loading-dots">{{ loadingText }}{{ loadingDots }}</span>
-    </ng-container>
-    <ng-container *ngIf="data.message.text === regenerationText">
-      <span>{{ regenerationText }}</span>
-    </ng-container>
-    <ng-container *ngIf="data.message.text !== '...'">
-      <div class="dx-chat-messagebubble-text" [innerHTML]="data.message.text"></div>
-    </ng-container>
-  </div>
-</dx-chat>
+    <dx-chat
+      [user]="currentUser"
+      (onMessageEntered)="onSendMessage($event)"
+      [reloadOnChange]="false"
+      [showAvatar]="false"
+      [showDayHeaders]="false"
+      [dataSource]="messages"
+      height="500"
+      messageTemplate="messageTemplate"
+      [showUserName]="false"
+    >
+      <div *dxTemplate="let data of 'messageTemplate'">
+        <ng-container *ngIf="data.message.isLoading">
+          <span class="loading-dots">{{ loadingText }}{{ loadingDots }}</span>
+        </ng-container>
+        <ng-container *ngIf="data.message.text === regenerationText">
+          <span>{{ regenerationText }}</span>
+        </ng-container>
+        <ng-container *ngIf="data.message.text !== '...'">
+          <div class="dx-chat-messagebubble-text" [innerHTML]="data.message.text"></div>
+        </ng-container>
+      </div>
+    </dx-chat>
   </section>
 
   <!-- Footer -->
   <footer class="text-center text-sm text-[#edf6f9]">
-    &copy; 2025 ESPRIT. Tous droits réservés.
+    &copy; 2025 ESPRIT. All rights reserved.
   </footer>
 </div>

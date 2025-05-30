@@ -36,20 +36,20 @@ app.add_middleware(
 )
 
 # ========== Load Dataset ==========
-data = pd.read_csv("combined_faq_dataset.csv")
+data = pd.read_csv("Filtered_Questions_and_Responses.csv")
 data = data.rename(columns={"Réponse": "Answer"})
 data["Class"] = range(len(data))
 
 # ========== Text Preprocessing ==========
-stemmer = SnowballStemmer("french")
-STOPWORDS_FR = set(stopwords.words("french"))
+STOPWORDS_EN = set(stopwords.words("english"))
+stemmer = SnowballStemmer("english")
 
 def cleanup(text: str) -> str:
     text = unicodedata.normalize("NFKC", text.lower())
     text = re.sub(r"http\S+|www\.\S+", " ", text)
     text = text.translate(str.maketrans("", "", string.digits + string.punctuation))
     tokens = re.findall(r"\b\w+\b", text, flags=re.UNICODE)
-    tokens = [stemmer.stem(t) for t in tokens if t not in STOPWORDS_FR]
+    tokens = [stemmer.stem(t) for t in tokens if t not in STOPWORDS_EN]
     return " ".join(tokens)
 
 docs_tokens = [cleanup(q).split() for q in data["Question"]]
@@ -82,18 +82,19 @@ def _is_in(text: str, phrases) -> bool:
 
 def get_response(user_text: str) -> str:
     if user_text.lower() == "bye":
-        return "Au revoir ! 👋"
+        return "Goodbye! 👋"
 
     greetings = {"hello", "hi", "salut", "bonjour", "hey"}
     thanks    = {"thanks", "merci"}
     okays     = {"ok", "d’accord", "daccord"}
 
     if _is_in(user_text, greetings):
-        return "Bonjour ! Comment puis-je vous aider ? 😊"
+        return "Hello! How can I help you? 😊"
     if _is_in(user_text, thanks):
-        return "Avec plaisir !"
+        return "You're welcome!"
     if _is_in(user_text, okays):
-        return "D’accord !"
+        return "Alright!"
+
 
     query_vec = tf_idf(cleanup(user_text).split())
     sims = [cosine(query_vec, qv) for qv in question_vecs]

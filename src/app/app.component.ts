@@ -94,7 +94,7 @@ onSendMessage(e: any): void {
             // Done typing, clear interval
             clearInterval(typingInterval);
           }
-        }, 20); // 50ms per character (adjust speed here)
+        }, 2); // 50ms per character (adjust speed here)
       },
       error: () => {
         this.stopLoadingAnimation();
